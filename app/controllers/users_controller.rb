@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    has_secure_password
     validates :email, presence :true
     validates :email, uniquness :true
     validates :name, presence :true
