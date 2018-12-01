@@ -2,20 +2,17 @@ class SessionsController < ApplicationController
 
     def create
         if auth
-          @user = User.find_or_create_by(fb_id: auth[:uid]) do |u|
-            u.name = auth['info']['name']
-            u.email = auth['info']['email']
-            u.img_url = auth['info']['image']
-          end
+          @user = User.find_or_create_by_oauth(auth)
           session[:user_id] = @user.id
-          puts("user found through FB")
+          puts("user created/found through FB")
           render json: @user
         else @user = User.find_by(name: params[:user][:name])
-          if @user.authenticate(params[:user][:password])
+          if @user.authenticate!(params[:user][:password])
             session[:user_id] = @user.id
             render json: @user
           else
             #return errors
+            puts("was not able to validate")
           end
       end
     end
