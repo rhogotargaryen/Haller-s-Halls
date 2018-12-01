@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
 
     def create
         if auth_hash
-          @user = User.find_or_create_by_oauth(auth_hash)
+          debugger
+          @user = User.find_or_create(auth_hash)
           session[:user_id] = @user.id
           #return json
           puts "user found and logged in through oauth"
