@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
             render json: @user
           else
             #return errors
-            puts("was not able to validate")
+            puts("was not able to validate, please check log in and try again")
           end
       end
     end
@@ -30,3 +30,4 @@ class SessionsController < ApplicationController
     end
 
 end
+
